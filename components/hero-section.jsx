@@ -1,5 +1,7 @@
+import { ChevronRight } from "lucide-react";
 import { TextAnimate } from "./magicui/text-animate";
 import Testimonial from "./testimonial";
+import { Button } from "./ui/button";
 
 export default function HeroSection() {
   return (
@@ -16,6 +18,11 @@ export default function HeroSection() {
         True Feedback - Where your identity remains a secret
       </TextAnimate>
       <Testimonial />
+      <div className="my-2.5 w-full flex justify-center items-center">
+        <Button className="w-[141px] h-[50px] rounded-full">
+          Get Started <ChevronRight />
+        </Button>
+      </div>
     </section>
   );
 }
