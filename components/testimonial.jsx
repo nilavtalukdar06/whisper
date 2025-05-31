@@ -15,12 +15,12 @@ export const dummyData = [
   },
   {
     user: "EchoNova",
-    message: "What's your dream job",
+    message: "What's your dream job?",
     time: 50,
   },
   {
     user: "PixelDrift",
-    message: "Hey, How are you today",
+    message: "Hey, How are you today?",
     time: 35,
   },
 ];
