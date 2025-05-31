@@ -2,7 +2,7 @@ import { Button } from "./ui/button";
 
 export default function Navbar() {
   return (
-    <header className="px-5 md:px-10 py-3 w-full flex justify-between items-center border-b border-dashed">
+    <header className="px-5 md:px-24 py-8 w-full flex justify-between items-center">
       <div>
         <h1 className="font-mono text-2xl font-semibold text-slate-800">
           Whisper
