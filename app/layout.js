@@ -1,9 +1,4 @@
-import { Outfit } from "next/font/google";
 import "./globals.css";
-
-const outfit = Outfit({
-  subsets: ["latin"],
-});
 
 export const metadata = {
   title: "Create Next App",
@@ -13,7 +8,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${outfit.className} antialiased`}>{children}</body>
+      <body className="font-mono antialiased">
+        <main>{children}</main>
+      </body>
     </html>
   );
 }
