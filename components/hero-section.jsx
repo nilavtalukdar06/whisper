@@ -1,4 +1,5 @@
 import { TextAnimate } from "./magicui/text-animate";
+import Testimonial from "./testimonial";
 
 export default function HeroSection() {
   return (
@@ -14,6 +15,7 @@ export default function HeroSection() {
       <TextAnimate className="text-center my-3 text-gray-500 text-sm lg:text-base">
         True Feedback - Where your identity remains a secret
       </TextAnimate>
+      <Testimonial />
     </section>
   );
 }
