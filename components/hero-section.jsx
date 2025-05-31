@@ -23,8 +23,9 @@ export default function HeroSection() {
         className="my-2.5 w-full flex justify-center items-center"
         href="/dashboard"
       >
-        <Button className="w-[141px] h-[50px] rounded-full">
-          Get Started <ChevronRight />
+        <Button className="w-[180px] h-[50px] rounded-full flex justify-center items-center gap-x-2">
+          <span>Get Started</span>
+          <ChevronRight />
         </Button>
       </Link>
     </section>
