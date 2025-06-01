@@ -70,7 +70,7 @@ export default function SendMessageComponent({ id }) {
           </Button>
         </div>
         <div className="my-10 flex flex-col justify-center items-center sm:items-start gap-y-6">
-          <Button disabled={isGenerating} onClick={generateContent}>
+          <Button disabled={isGenerating}>
             {isGenerating ? (
               <div className="flex justify-center items-center gap-x-2">
                 <Spinner />
