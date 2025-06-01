@@ -4,11 +4,34 @@ import Spinner from "@/components/spinner";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import axios from "axios";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 export default function SendMessageComponent({ id }) {
   const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async () => {
+    try {
+      if (!message) {
+        toast.error("Enter a message first!");
+        return;
+      }
+      setIsSubmitting(true);
+      await axios.post(`/api/send-message`, {
+        message: message,
+        user_id: id,
+      });
+      toast.success("Message has been sent");
+      setMessage("");
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to send message");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="max-w-7xl mx-auto my-6 p-6">
@@ -28,7 +51,7 @@ export default function SendMessageComponent({ id }) {
           onChange={(e) => setMessage(e.target.value)}
         />
         <div className="my-5 w-full flex justify-center items-center">
-          <Button type="submit" disabled={isSubmitting}>
+          <Button type="submit" disabled={isSubmitting} onClick={handleSubmit}>
             {isSubmitting ? (
               <div className="flex justify-center items-center gap-x-2">
                 <Spinner />
