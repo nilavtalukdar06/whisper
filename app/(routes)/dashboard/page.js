@@ -5,10 +5,21 @@ import { authClient } from "@/utils/auth-client";
 import { TextAnimate } from "@/components/magicui/text-animate";
 import { FadeLoader } from "react-spinners";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 export default function Dashboard() {
   const { data: session, isPending } = authClient.useSession();
   const [url, setUrl] = useState("");
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(url);
+      toast.success("Copied!");
+    } catch (err) {
+      toast.error("Failed to copy");
+      console.error("Failed to copy text: ", err);
+    }
+  };
 
   useEffect(() => {
     session?.user?.id &&
@@ -35,7 +46,9 @@ export default function Dashboard() {
               <p className="px-5 py-2 bg-gray-100 rounded hidden sm:flex">
                 {url}
               </p>
-              <Button className="h-full">Copy</Button>
+              <Button className="h-full" onClick={handleCopy}>
+                Copy
+              </Button>
             </div>
           </div>
         </div>
