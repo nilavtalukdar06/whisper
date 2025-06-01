@@ -17,6 +17,7 @@ export default function LoginPage() {
 
   const handleSubmit = async (e) => {
     try {
+      e.preventDefault();
       const { error } = await authClient.signIn.email(
         {
           email: formData.email,

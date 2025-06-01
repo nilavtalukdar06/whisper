@@ -31,9 +31,12 @@ export default function SignupPage() {
             setIsLoading(true);
           },
           onSuccess: (ctx) => {
+            setIsLoading(false);
             router.push("/dashboard");
           },
           onError: (ctx) => {
+            setIsLoading(false);
+            setFormData({ ...formData, name: "", email: "", password: "" });
             toast.error("Some error occured");
           },
         }
