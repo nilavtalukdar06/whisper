@@ -47,7 +47,7 @@ export default function Navbar() {
         ) : session ? (
           <Button disabled={isLoading} onClick={logout}>
             {isLoading ? (
-              <div className="flex justify-center items-center">
+              <div className="flex justify-center items-center gap-x-2">
                 <Spinner />
                 <p>Logging out...</p>
               </div>
