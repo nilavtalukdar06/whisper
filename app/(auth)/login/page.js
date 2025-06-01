@@ -64,7 +64,7 @@ export default function LoginPage() {
               {isLoading ? (
                 <div className="flex gap-x-2 justify-center items-center">
                   <Spinner />
-                  <p>Loggin in...</p>
+                  <p>Logging in...</p>
                 </div>
               ) : (
                 "Login"
