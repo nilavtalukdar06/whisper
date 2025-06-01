@@ -2,6 +2,8 @@ import FeaturesSection from "@/components/features-section";
 import Footer from "@/components/footer";
 import HeroSection from "@/components/hero-section";
 import Navbar from "@/components/navbar";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -9,6 +11,19 @@ export default function Home() {
       <Navbar />
       <HeroSection />
       <FeaturesSection />
+      <div className="my-10 flex justify-center items-center gap-y-4">
+        <p className="text-3xl sm:text-5xl font-medium">
+          Speak Freely Stay Anonymous
+        </p>
+        <Link
+          className="w-full flex justify-center items-center"
+          href="/contact"
+        >
+          <Button className="w-[180px] h-[50px] rounded-full flex justify-center items-center">
+            <span>Contact Us</span>
+          </Button>
+        </Link>
+      </div>
       <Footer />
     </section>
   );
