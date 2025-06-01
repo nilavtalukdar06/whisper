@@ -12,7 +12,7 @@ export default async function SendMessage({ params }) {
         </TextAnimate>
         <div className="max-w-5xl mx-auto my-10">
           <Label htmlFor="message" className="mb-2 text-lg">
-            Send anonymous message
+            Send anonymous message {id}
           </Label>
           <Textarea
             id="message"
