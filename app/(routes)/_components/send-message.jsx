@@ -12,6 +12,7 @@ import toast from "react-hot-toast";
 export default function SendMessageComponent({ id }) {
   const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isGenerating, setIsGenerating] = useState(false);
   const [suggestedMessages, setSuggestedMessages] = useState({
     message_1: "What's your favourite movie?",
     message_2: "Do you have any pets?",
@@ -69,7 +70,16 @@ export default function SendMessageComponent({ id }) {
           </Button>
         </div>
         <div className="my-10 flex flex-col justify-center items-center sm:items-start gap-y-6">
-          <Button>Suggest Messages</Button>
+          <Button disabled={isGenerating} onClick={generateContent}>
+            {isGenerating ? (
+              <div className="flex justify-center items-center gap-x-2">
+                <Spinner />
+                <p>Generating with AI...</p>
+              </div>
+            ) : (
+              "Suggest Messages"
+            )}
+          </Button>
           <div className="my-5 w-full flex flex-col justify-center items-center sm:items-start gap-y-6">
             <p className="text-slate-700 text-center sm:text-start">
               Click on any message below to select it
