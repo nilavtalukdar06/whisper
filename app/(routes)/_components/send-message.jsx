@@ -30,7 +30,7 @@ export default function SendMessageComponent({ id }) {
         message: message,
         user_id: id,
       });
-      if (result.data.message.can_send_message === "no") {
+      if (result.data.can_send_message === "no") {
         toast.error("User is no longer accepting responses");
         return;
       }
