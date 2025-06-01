@@ -6,6 +6,7 @@ import { authClient } from "@/utils/auth-client";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import Link from "next/link";
 
 export default function SignupPage() {
   const router = useRouter();
@@ -19,6 +20,10 @@ export default function SignupPage() {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
+      if (formData.password.length < 8) {
+        toast.error("Password must be at least 8 characters long");
+        return;
+      }
       const { error } = await authClient.signUp.email(
         {
           name: formData.name,
@@ -32,6 +37,7 @@ export default function SignupPage() {
           },
           onSuccess: (ctx) => {
             setIsLoading(false);
+            setFormData({ ...formData, name: "", email: "", password: "" });
             router.push("/dashboard");
           },
           onError: (ctx) => {
@@ -129,6 +135,14 @@ export default function SignupPage() {
                 "Signup"
               )}
             </Button>
+          </div>
+          <div>
+            <p className="text-sm text-center">
+              Already have an account?{" "}
+              <Link href="/login" className="text-blue-500">
+                login now
+              </Link>
+            </p>
           </div>
         </form>
       </div>

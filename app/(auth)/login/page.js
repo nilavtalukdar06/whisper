@@ -6,6 +6,7 @@ import Spinner from "@/components/spinner";
 import Link from "next/link";
 import { authClient } from "@/utils/auth-client";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -31,6 +32,7 @@ export default function LoginPage() {
           },
           onSuccess: (ctx) => {
             setIsLoading(false);
+            setFormData({ ...formData, email: "", password: "" });
             router.push("/dashboard");
           },
           onError: (ctx) => {
