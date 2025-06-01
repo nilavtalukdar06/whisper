@@ -1,9 +1,17 @@
 "use client";
 import { TextAnimate } from "@/components/magicui/text-animate";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import Spinner from "@/components/spinner";
 import Link from "next/link";
 
 export default function LoginPage() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
   return (
     <section className="min-h-screen max-w-screen overflow-x-hidden">
       <div className="max-w-sm md:max-w-md mx-auto my-24 p-6">
@@ -16,8 +24,17 @@ export default function LoginPage() {
             <input
               id="email"
               name="email"
+              type="email"
+              value={formData.email}
               placeholder="Enter your email"
-              className="px-3 py-2 border border-gray-200 rounded"
+              className={`px-3 py-2 border border-gray-200 rounded ${
+                isLoading && "opacity-75"
+              }`}
+              disabled={isLoading}
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
+              required={true}
             />
           </div>
           <div className="space-y-2 w-full flex flex-col">
@@ -25,12 +42,34 @@ export default function LoginPage() {
             <input
               id="password"
               name="password"
+              type="password"
+              value={formData.password}
               placeholder="Enter your password"
-              className="px-3 py-2 border border-gray-200 rounded"
+              className={`px-3 py-2 border border-gray-200 rounded ${
+                isLoading && "opacity-75"
+              }`}
+              disabled={isLoading}
+              onChange={(e) =>
+                setFormData({ ...formData, password: e.target.value })
+              }
+              required={true}
             />
           </div>
           <div className="w-full my-4">
-            <Button className="rounded w-full py-6 text-lg">Login</Button>
+            <Button
+              className="rounded w-full py-6 text-lg"
+              type="submit"
+              disabled={isLoading}
+            >
+              {isLoading ? (
+                <div className="flex gap-x-2 justify-center items-center">
+                  <Spinner />
+                  <p>Loggin in...</p>
+                </div>
+              ) : (
+                "Login"
+              )}
+            </Button>
           </div>
           <div>
             <p className="text-sm text-center">
