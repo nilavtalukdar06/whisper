@@ -43,6 +43,7 @@ export default function Dashboard() {
         accept_messages: checked,
       });
       console.log(response.data);
+      toast.success("Settings updated successfully");
     } catch (error) {
       console.error(error);
       toast.error("Failed to update settings");
