@@ -2,6 +2,7 @@ import FeaturesSection from "@/components/features-section";
 import Footer from "@/components/footer";
 import HeroSection from "@/components/hero-section";
 import Navbar from "@/components/navbar";
+import { TextAnimate } from "@/components/magicui/text-animate";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
@@ -12,9 +13,9 @@ export default function Home() {
       <HeroSection />
       <FeaturesSection />
       <div className="my-10 flex flex-col justify-center items-center gap-y-8">
-        <p className="text-3xl sm:text-5xl font-medium">
+        <TextAnimate className="text-3xl sm:text-5xl font-medium">
           Speak Freely Stay Anonymous
-        </p>
+        </TextAnimate>
         <Link
           className="w-full flex justify-center items-center"
           href="/contact"
