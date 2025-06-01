@@ -7,7 +7,7 @@ const messageSchema = new mongoose.Schema(
       required: [true, "message is required"],
       trim: true,
     },
-    createdBy: {
+    sentTo: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "user",
       required: true,
