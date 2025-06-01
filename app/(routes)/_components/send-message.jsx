@@ -26,10 +26,14 @@ export default function SendMessageComponent({ id }) {
         return;
       }
       setIsSubmitting(true);
-      await axios.post(`/api/send-message`, {
+      const result = await axios.post(`/api/send-message`, {
         message: message,
         user_id: id,
       });
+      if (result.message.can_send_message === "no") {
+        toast.error("User is no longer accepting responses");
+        return;
+      }
       toast.success("Message has been sent");
       setMessage("");
     } catch (error) {
