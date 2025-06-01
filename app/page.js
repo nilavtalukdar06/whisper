@@ -13,7 +13,7 @@ export default function Home() {
       <HeroSection />
       <FeaturesSection />
       <div className="my-10 flex flex-col justify-center items-center gap-y-8">
-        <TextAnimate className="text-3xl sm:text-5xl font-medium">
+        <TextAnimate className="text-3xl sm:text-5xl font-medium text-center">
           Speak Freely Stay Anonymous
         </TextAnimate>
         <Link
