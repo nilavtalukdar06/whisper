@@ -11,7 +11,7 @@ export default function Home() {
       <Navbar />
       <HeroSection />
       <FeaturesSection />
-      <div className="my-10 flex justify-center items-center gap-y-4">
+      <div className="my-10 flex flex-col justify-center items-center gap-y-8">
         <p className="text-3xl sm:text-5xl font-medium">
           Speak Freely Stay Anonymous
         </p>
