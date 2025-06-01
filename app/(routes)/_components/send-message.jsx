@@ -32,6 +32,7 @@ export default function SendMessageComponent({ id }) {
       });
       if (result.data.can_send_message === "no") {
         toast.error("User is no longer accepting responses");
+        setMessage("");
         return;
       }
       toast.success("Message has been sent");
