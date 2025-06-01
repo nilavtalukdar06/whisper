@@ -7,10 +7,12 @@ import { FadeLoader } from "react-spinners";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { Switch } from "@/components/ui/switch";
 
 export default function Dashboard() {
   const { data: session, isPending } = authClient.useSession();
   const [url, setUrl] = useState("");
+  const [toggle, setToggle] = useState(true);
 
   const handleCopy = async () => {
     try {
@@ -32,6 +34,24 @@ export default function Dashboard() {
       console.error(error);
       toast.error("Failed to create settings");
     }
+  };
+
+  const updateSettings = async () => {
+    try {
+      const response = await axios.put("/api/update-settings", {
+        user_id: session?.user?.id,
+        accept_messages: toggle,
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to update settings");
+    }
+  };
+
+  const handleChange = (checked) => {
+    updateSettings();
+    setToggle(checked);
   };
 
   useEffect(() => {
@@ -63,6 +83,10 @@ export default function Dashboard() {
               <Button className="h-full" onClick={handleCopy}>
                 Copy
               </Button>
+            </div>
+            <div className="my-4 flex justify-center items-center gap-x-2">
+              <Switch checked={toggle} onCheckedChange={handleChange} />
+              <p>Accept messages : {toggle ? "on" : "off"}</p>
             </div>
           </div>
         </div>
