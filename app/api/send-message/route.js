@@ -1,5 +1,6 @@
 import connectToDb from "@/db/mongodb";
 import messageModel from "@/model/message.model";
+import settingsModel from "@/model/settings.model";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
@@ -14,6 +15,17 @@ export async function POST(request) {
       );
     }
     await connectToDb();
+    const result = await settingsModel.findOne({ user_id: user_id });
+    if (result.accept_messages === false) {
+      return NextResponse.json(
+        {
+          message: "user is not longer accepting messages",
+          can_send_message: "no",
+        },
+        { status: 200 }
+      );
+    }
+
     await messageModel.create({
       content: message,
       sentTo: user_id,
