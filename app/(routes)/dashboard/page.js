@@ -6,6 +6,7 @@ import { TextAnimate } from "@/components/magicui/text-animate";
 import { FadeLoader } from "react-spinners";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import axios from "axios";
 
 export default function Dashboard() {
   const { data: session, isPending } = authClient.useSession();
@@ -21,9 +22,22 @@ export default function Dashboard() {
     }
   };
 
+  const createSettings = async (user_id) => {
+    try {
+      const result = await axios.post("/api/create-settings", {
+        user_id: user_id,
+      });
+      console.log(result.data);
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to create settings");
+    }
+  };
+
   useEffect(() => {
     session?.user?.id &&
       setUrl(`http://localhost:3000/message/${session?.user?.id}`);
+    session?.user?.id && createSettings(session?.user?.id);
   }, [session]);
 
   return (
