@@ -5,12 +5,18 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import axios from "axios";
+import Link from "next/link";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
 export default function SendMessageComponent({ id }) {
   const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [suggestedMessages, setSuggestedMessages] = useState({
+    message_1: "What's your favourite movie?",
+    message_2: "Do you have any pets?",
+    message_3: "What's your dream job?",
+  });
 
   const handleSubmit = async () => {
     try {
@@ -61,6 +67,43 @@ export default function SendMessageComponent({ id }) {
               "Send Message"
             )}
           </Button>
+        </div>
+        <div className="my-10 flex flex-col justify-center items-center sm:items-start gap-y-6">
+          <Button>Suggest Messages</Button>
+          <div className="my-5 w-full flex flex-col justify-center items-center sm:items-start gap-y-6">
+            <p className="text-slate-700 text-center sm:text-start">
+              Click on any message below to select it
+            </p>
+            <div className="p-5 border rounded w-full">
+              <h2 className="text-2xl">Messages</h2>
+              <div className="flex flex-col gap-y-4 my-4">
+                <p
+                  className="px-2 py-2 border rounded text-center cursor-pointer hover:bg-gray-100/80 transition-colors ease-in-out duration-200"
+                  onClick={() => setMessage(suggestedMessages.message_1)}
+                >
+                  {suggestedMessages.message_1}
+                </p>
+                <p
+                  className="px-2 py-2 border rounded text-center cursor-pointer hover:bg-gray-100/80 transition-colors ease-in-out duration-200"
+                  onClick={() => setMessage(suggestedMessages.message_2)}
+                >
+                  {suggestedMessages.message_2}
+                </p>
+                <p
+                  className="px-2 py-2 border rounded text-center cursor-pointer hover:bg-gray-100/80 transition-colors ease-in-out duration-200"
+                  onClick={() => setMessage(suggestedMessages.message_3)}
+                >
+                  {suggestedMessages.message_3}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="my-5 flex flex-col w-full gap-y-4 justify-center items-center">
+            <p>Get your message board</p>
+            <Link href="/signup">
+              <Button>Create Your Account</Button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
