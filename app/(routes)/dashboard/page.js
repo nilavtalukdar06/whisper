@@ -1,9 +1,45 @@
+"use client";
 import Navbar from "@/components/navbar";
+import { Button } from "@/components/ui/button";
+import { authClient } from "@/utils/auth-client";
+import { TextAnimate } from "@/components/magicui/text-animate";
+import { FadeLoader } from "react-spinners";
+import { useEffect, useState } from "react";
 
 export default function Dashboard() {
+  const { data: session, isPending } = authClient.useSession();
+  const [url, setUrl] = useState("");
+
+  useEffect(() => {
+    session?.user?.id &&
+      setUrl(`http://localhost:3000/message/${session?.user?.id}`);
+  }, [session]);
+
   return (
     <section className="min-h-screen max-w-screen overflow-x-hidden relative">
       <Navbar />
+      {isPending ? (
+        <div className="w-full my-24 flex justify-center items-center">
+          <FadeLoader />
+        </div>
+      ) : (
+        <div className="px-5 md:px-24 py-8 w-full">
+          <h1 className="text-2xl md:text-3xl font-medium text-center sm:text-start">
+            Hello {session?.user?.name || "Guest"}
+          </h1>
+          <div className="w-full flex flex-col gap-y-2 justify-center items-center sm:items-start my-5">
+            <TextAnimate className="text-lg sm:text-xl text-center">
+              Copy your unique link
+            </TextAnimate>
+            <div className="flex gap-x-2 justify-center items-center my-2 flex-wrap">
+              <p className="px-5 py-2 bg-gray-100 rounded hidden sm:flex">
+                {url}
+              </p>
+              <Button className="h-full">Copy</Button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
