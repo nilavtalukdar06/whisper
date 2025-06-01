@@ -4,13 +4,49 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import Spinner from "@/components/spinner";
 import Link from "next/link";
+import { authClient } from "@/utils/auth-client";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
+  const handleSubmit = async (e) => {
+    try {
+      const { error } = await authClient.signIn.email(
+        {
+          email: formData.email,
+          password: formData.password,
+          callbackURL: "/dashboard",
+          rememberMe: true,
+        },
+        {
+          onRequest: (ctx) => {
+            setIsLoading(true);
+          },
+          onSuccess: (ctx) => {
+            setIsLoading(false);
+            router.push("/dashboard");
+          },
+          onError: (ctx) => {
+            setIsLoading(false);
+            setFormData({ ...formData, email: "", password: "" });
+            toast.error("Invalid credentials");
+          },
+        }
+      );
+      if (error) {
+        throw new Error(error);
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Some error occured");
+    }
+  };
 
   return (
     <section className="min-h-screen max-w-screen overflow-x-hidden">
@@ -18,7 +54,10 @@ export default function LoginPage() {
         <TextAnimate className="text-3xl md:text-4xl font-normal text-center">
           Login to Whisper
         </TextAnimate>
-        <form className="my-12 flex flex-col gap-y-6 justify-center items-center w-full">
+        <form
+          className="my-12 flex flex-col gap-y-6 justify-center items-center w-full"
+          onSubmit={handleSubmit}
+        >
           <div className="space-y-2 w-full flex flex-col">
             <label htmlFor="email">Email</label>
             <input
