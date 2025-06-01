@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 import { Button } from "./ui/button";
 import { authClient } from "@/utils/auth-client";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Spinner from "./spinner";
 import Link from "next/link";
 
@@ -33,10 +33,6 @@ export default function Navbar() {
       toast.error("Failed to logout");
     }
   };
-
-  useEffect(() => {
-    console.log(session);
-  }, [session]);
 
   return (
     <header className="px-5 md:px-24 py-8 w-full flex justify-between items-center">

@@ -19,7 +19,7 @@ export default function LoginPage() {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      const { error } = await authClient.signIn.email(
+      await authClient.signIn.email(
         {
           email: formData.email,
           password: formData.password,
@@ -42,9 +42,6 @@ export default function LoginPage() {
           },
         }
       );
-      if (error) {
-        throw new Error(error);
-      }
     } catch (error) {
       console.error(error);
       toast.error("Some error occured");

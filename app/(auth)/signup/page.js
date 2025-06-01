@@ -24,7 +24,7 @@ export default function SignupPage() {
         toast.error("Password must be at least 8 characters long");
         return;
       }
-      const { error } = await authClient.signUp.email(
+      await authClient.signUp.email(
         {
           name: formData.name,
           email: formData.email,
@@ -47,9 +47,6 @@ export default function SignupPage() {
           },
         }
       );
-      if (error) {
-        throw new Error(error);
-      }
     } catch (error) {
       console.error(error);
       toast.error("Some error occured");
