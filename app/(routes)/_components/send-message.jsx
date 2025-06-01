@@ -40,6 +40,25 @@ export default function SendMessageComponent({ id }) {
     }
   };
 
+  const generateContent = async () => {
+    try {
+      setIsGenerating(true);
+      const response = await axios.get("/api/generate-content");
+      const results = response.data.message.split("|");
+      setSuggestedMessages({
+        ...suggestedMessages,
+        message_1: results[0],
+        message_2: results[1],
+        message_3: results[2],
+      });
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to generate content");
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
   return (
     <div className="max-w-7xl mx-auto my-6 p-6">
       <TextAnimate className="text-center text-3xl md:text-4xl font-semibold">
@@ -70,7 +89,7 @@ export default function SendMessageComponent({ id }) {
           </Button>
         </div>
         <div className="my-10 flex flex-col justify-center items-center sm:items-start gap-y-6">
-          <Button disabled={isGenerating}>
+          <Button disabled={isGenerating} onClick={generateContent}>
             {isGenerating ? (
               <div className="flex justify-center items-center gap-x-2">
                 <Spinner />
@@ -87,24 +106,33 @@ export default function SendMessageComponent({ id }) {
             <div className="p-5 border rounded w-full">
               <h2 className="text-2xl">Messages</h2>
               <div className="flex flex-col gap-y-4 my-4">
-                <p
+                <button
                   className="px-2 py-2 border rounded text-center cursor-pointer hover:bg-gray-100/80 transition-colors ease-in-out duration-200"
+                  disabled={isGenerating}
                   onClick={() => setMessage(suggestedMessages.message_1)}
                 >
-                  {suggestedMessages.message_1}
-                </p>
-                <p
+                  {isGenerating
+                    ? "Generating with AI..."
+                    : `${suggestedMessages.message_1}`}
+                </button>
+                <button
                   className="px-2 py-2 border rounded text-center cursor-pointer hover:bg-gray-100/80 transition-colors ease-in-out duration-200"
+                  disabled={isGenerating}
                   onClick={() => setMessage(suggestedMessages.message_2)}
                 >
-                  {suggestedMessages.message_2}
-                </p>
-                <p
+                  {isGenerating
+                    ? "Generating with AI..."
+                    : `${suggestedMessages.message_2}`}
+                </button>
+                <button
                   className="px-2 py-2 border rounded text-center cursor-pointer hover:bg-gray-100/80 transition-colors ease-in-out duration-200"
+                  disabled={isGenerating}
                   onClick={() => setMessage(suggestedMessages.message_3)}
                 >
-                  {suggestedMessages.message_3}
-                </p>
+                  {isGenerating
+                    ? "Generating with AI..."
+                    : `${suggestedMessages.message_3}`}
+                </button>
               </div>
             </div>
           </div>
