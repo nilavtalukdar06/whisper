@@ -36,11 +36,11 @@ export default function Dashboard() {
     }
   };
 
-  const updateSettings = async () => {
+  const updateSettings = async (checked) => {
     try {
       const response = await axios.put("/api/update-settings", {
         user_id: session?.user?.id,
-        accept_messages: toggle,
+        accept_messages: checked,
       });
       console.log(response.data);
     } catch (error) {
@@ -50,7 +50,7 @@ export default function Dashboard() {
   };
 
   const handleChange = (checked) => {
-    updateSettings();
+    updateSettings(checked);
     setToggle(checked);
   };
 
