@@ -1,3 +1,4 @@
+import { Toaster } from "react-hot-toast";
 import "./globals.css";
 
 export const metadata = {
@@ -9,7 +10,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="font-mono antialiased">
-        <main>{children}</main>
+        <main>
+          {children}
+          <Toaster />
+        </main>
       </body>
     </html>
   );
