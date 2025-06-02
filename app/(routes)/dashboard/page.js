@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { Switch } from "@/components/ui/switch";
+import { RefreshCcw } from "lucide-react";
+import MessageCard from "../_components/message-card";
 
 export default function Dashboard() {
   const { data: session, isPending } = authClient.useSession();
@@ -89,7 +91,17 @@ export default function Dashboard() {
               <Switch checked={toggle} onCheckedChange={handleChange} />
               <p>Accept messages : {toggle ? "on" : "off"}</p>
             </div>
+            <div>
+              <Button variant="outline">
+                <RefreshCcw />
+              </Button>
+            </div>
           </div>
+          <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <MessageCard />
+            <MessageCard />
+            <MessageCard />
+          </section>
         </div>
       )}
     </section>
