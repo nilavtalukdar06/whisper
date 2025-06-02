@@ -57,7 +57,11 @@ export default function Dashboard() {
     try {
       setIsLoading(true);
       const response = await axios.get(`/api/get-messages?user_id=${user_id}`);
-      setMessages(response.data.message);
+      if (response.data.message.length === 0) {
+        setMessages([]);
+      } else {
+        setMessages(response.data.message);
+      }
     } catch (error) {
       console.error(error);
       toast.error("Failed to get messages");
