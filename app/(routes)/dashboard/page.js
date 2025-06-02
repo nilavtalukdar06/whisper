@@ -73,7 +73,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     session?.user?.id &&
-      setUrl(`http://localhost:3000/message/${session?.user?.id}`);
+      setUrl(`https://whisper-xuwf.vercel.app/message/${session?.user?.id}`);
     session?.user?.id && createSettings(session?.user?.id);
     session?.user?.id && getMessages(session?.user?.id);
   }, [session]);
