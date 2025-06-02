@@ -52,8 +52,12 @@ export default function SendMessageComponent({ id }) {
   const generateContent = async () => {
     try {
       setIsGenerating(true);
-      const response = await axios.get("/api/generate-content");
-      const results = response.data.message.split("|");
+      const response = await fetch("/api/generate-content");
+      if (!response.ok) {
+        throw new Error(`error: ${response.status}: ${response.statusText}`);
+      }
+      const data = await response.json();
+      const results = data.message.split("|");
       setSuggestedMessages({
         ...suggestedMessages,
         message_1: results[0],

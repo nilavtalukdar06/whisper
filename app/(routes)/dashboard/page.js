@@ -111,7 +111,7 @@ export default function Dashboard() {
             <TextAnimate className="text-lg sm:text-xl text-center">
               Copy your unique link
             </TextAnimate>
-            <div className="flex gap-x-2 justify-center items-center my-2 flex-wrap">
+            <div className="flex gap-2 justify-center items-center my-2 flex-wrap">
               <p className="px-5 py-2 bg-gray-100 rounded hidden sm:flex">
                 {url}
               </p>
@@ -136,7 +136,7 @@ export default function Dashboard() {
             {isLoading ? (
               <FadeLoader />
             ) : !messages.length ? (
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-gray-600 text-center sm:text-start">
                 No messages are present at this moment
               </p>
             ) : (
