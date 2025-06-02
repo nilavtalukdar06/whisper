@@ -21,13 +21,17 @@ export default function SendMessageComponent({ id }) {
 
   const handleSubmit = async () => {
     try {
-      if (!message) {
+      if (!message.trim()) {
         toast.error("Enter a message first!");
+        return;
+      }
+      if (message.length > 1000) {
+        toast.error("Message is too long. Maximum 1000 characters allowed.");
         return;
       }
       setIsSubmitting(true);
       const result = await axios.post(`/api/send-message`, {
-        message: message,
+        message: message.trim(),
         user_id: id,
       });
       if (result.data.can_send_message === "no") {
@@ -39,7 +43,7 @@ export default function SendMessageComponent({ id }) {
       setMessage("");
     } catch (error) {
       console.error(error);
-      toast.error("Failed to send message");
+      toast.error(error.response?.data?.message || "Failed to send message");
     } finally {
       setIsSubmitting(false);
     }

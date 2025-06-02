@@ -13,6 +13,7 @@ import {
 import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { XIcon } from "lucide-react";
+import { toast } from "react-hot-toast";
 
 export default function MessageCard({
   content,
@@ -27,8 +28,10 @@ export default function MessageCard({
         data: { message_id: message_id },
       });
       setMessages(messages.filter((message) => message._id != message_id));
+      toast.success("Message deleted successfully");
     } catch (error) {
       console.error(error);
+      toast.error("Failed to delete message");
     }
   };
 

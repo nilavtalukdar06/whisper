@@ -41,30 +41,43 @@ export default function Dashboard() {
 
   const updateSettings = async (checked) => {
     try {
+      if (!session?.user?.id) {
+        toast.error("User session not found");
+        return;
+      }
       const response = await axios.put("/api/update-settings", {
-        user_id: session?.user?.id,
+        user_id: session.user.id,
         accept_messages: checked,
       });
-      console.log(response.data);
-      toast.success("Settings updated successfully");
+      if (response.data) {
+        setToggle(checked);
+        toast.success("Settings updated successfully");
+      }
     } catch (error) {
       console.error(error);
-      toast.error("Failed to update settings");
+      toast.error(error.response?.data?.message || "Failed to update settings");
+      setToggle(!checked); // Revert the toggle state on error
     }
   };
 
   const getMessages = async (user_id) => {
+    if (!user_id) {
+      toast.error("User ID is required");
+      return;
+    }
+
     try {
       setIsLoading(true);
       const response = await axios.get(`/api/get-messages?user_id=${user_id}`);
-      if (response.data.message.length === 0) {
-        setMessages([]);
-      } else {
+      if (response.data && Array.isArray(response.data.message)) {
         setMessages(response.data.message);
+      } else {
+        setMessages([]);
       }
     } catch (error) {
       console.error(error);
       toast.error("Failed to get messages");
+      setMessages([]);
     } finally {
       setIsLoading(false);
     }
