@@ -1,3 +1,4 @@
+"use client";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -10,9 +11,20 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
+import axios from "axios";
 import { XIcon } from "lucide-react";
 
-export default function MessageCard({ content, time }) {
+export default function MessageCard({ content, time, message_id }) {
+  const deleteMessage = async () => {
+    try {
+      await axios.delete("/api/delete-message", {
+        data: { message_id: message_id },
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const date = new Date(time);
   return (
     <section className="p-6 rounded-md border">
@@ -37,7 +49,10 @@ export default function MessageCard({ content, time }) {
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction className="bg-red-500 hover:bg-red-600">
+              <AlertDialogAction
+                className="bg-red-500 hover:bg-red-600"
+                onClick={deleteMessage}
+              >
                 Continue
               </AlertDialogAction>
             </AlertDialogFooter>

@@ -128,6 +128,9 @@ export default function Dashboard() {
                   key={item._id}
                   content={item.content}
                   time={item.createdAt}
+                  message_id={item._id}
+                  messages={messages}
+                  setMessages={setMessages}
                 />
               ))
             )}
