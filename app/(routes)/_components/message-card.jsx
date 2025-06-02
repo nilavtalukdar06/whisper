@@ -14,12 +14,19 @@ import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { XIcon } from "lucide-react";
 
-export default function MessageCard({ content, time, message_id }) {
+export default function MessageCard({
+  content,
+  time,
+  message_id,
+  messages,
+  setMessages,
+}) {
   const deleteMessage = async () => {
     try {
       await axios.delete("/api/delete-message", {
         data: { message_id: message_id },
       });
+      setMessages(messages.filter((message) => message._id != message_id));
     } catch (error) {
       console.error(error);
     }
