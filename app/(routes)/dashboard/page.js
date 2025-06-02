@@ -15,7 +15,8 @@ export default function Dashboard() {
   const { data: session, isPending } = authClient.useSession();
   const [url, setUrl] = useState("");
   const [toggle, setToggle] = useState(true);
-
+  const [messages, setMessages] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(url);
@@ -52,6 +53,19 @@ export default function Dashboard() {
     }
   };
 
+  const getMessages = async (user_id) => {
+    try {
+      setIsLoading(true);
+      const response = await axios.get(`/api/get-messages?user_id=${user_id}`);
+      setMessages(response.data.message);
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to get messages");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const handleChange = (checked) => {
     updateSettings(checked);
     setToggle(checked);
@@ -61,6 +75,7 @@ export default function Dashboard() {
     session?.user?.id &&
       setUrl(`http://localhost:3000/message/${session?.user?.id}`);
     session?.user?.id && createSettings(session?.user?.id);
+    session?.user?.id && getMessages(session?.user?.id);
   }, [session]);
 
   return (
@@ -92,15 +107,30 @@ export default function Dashboard() {
               <p>Accept messages : {toggle ? "on" : "off"}</p>
             </div>
             <div>
-              <Button variant="outline">
+              <Button
+                variant="outline"
+                onClick={() => getMessages(session?.user?.id)}
+              >
                 <RefreshCcw />
               </Button>
             </div>
           </div>
           <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <MessageCard />
-            <MessageCard />
-            <MessageCard />
+            {isLoading ? (
+              <FadeLoader />
+            ) : !messages.length ? (
+              <p className="text-sm text-gray-600">
+                No messages are present at this moment
+              </p>
+            ) : (
+              messages.map((item) => (
+                <MessageCard
+                  key={item._id}
+                  content={item.content}
+                  time={item.createdAt}
+                />
+              ))
+            )}
           </section>
         </div>
       )}
