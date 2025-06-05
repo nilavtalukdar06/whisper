@@ -85,7 +85,6 @@ export default function Dashboard() {
 
   const handleChange = (checked) => {
     updateSettings(checked);
-    setToggle(checked);
   };
 
   useEffect(() => {
