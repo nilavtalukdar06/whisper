@@ -62,7 +62,7 @@ export default function FeaturesSection() {
     },
   ];
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-items-center  relative z-10 py-10 max-w-7xl mx-auto font-mono">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-items-center  relative z-10 py-10 max-w-7xl mx-auto font-mono p-6">
       {features.map((feature, index) => (
         <Feature key={feature.title} {...feature} index={index} />
       ))}

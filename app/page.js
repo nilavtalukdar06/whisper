@@ -5,12 +5,14 @@ import Navbar from "@/components/navbar";
 import { TextAnimate } from "@/components/magicui/text-animate";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { CTA } from "@/components/cta";
 
 export default function Home() {
   return (
     <section className="min-h-screen max-w-screen relative overflow-x-hidden bg-gray-50/20">
       <Navbar />
       <HeroSection />
+      <CTA />
       <FeaturesSection />
       <div className="my-10 flex flex-col justify-center items-center gap-y-8">
         <TextAnimate className="text-3xl sm:text-5xl font-medium text-center">
