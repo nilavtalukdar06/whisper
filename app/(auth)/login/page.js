@@ -21,8 +21,8 @@ export default function LoginPage() {
       e.preventDefault();
       await authClient.signIn.email(
         {
-          email: formData.email,
-          password: formData.password,
+          email: formData.email.trim(),
+          password: formData.password.trim(),
           callbackURL: "/dashboard",
           rememberMe: true,
         },

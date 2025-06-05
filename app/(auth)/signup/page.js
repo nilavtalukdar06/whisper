@@ -26,9 +26,9 @@ export default function SignupPage() {
       }
       await authClient.signUp.email(
         {
-          name: formData.name,
-          email: formData.email,
-          password: formData.password,
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          password: formData.password.trim(),
           callbackURL: "/dashboard",
         },
         {
