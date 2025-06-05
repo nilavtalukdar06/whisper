@@ -6,10 +6,10 @@ export async function PUT(request) {
   try {
     await connectToDb();
     const { user_id, accept_messages } = await request.json();
-    if (!user_id) {
+    if (!user_id || accept_messages === undefined) {
       return NextResponse.json(
         {
-          message: "user id is not present",
+          message: "fields are incomplete",
         },
         { status: 200 }
       );
