@@ -111,10 +111,13 @@ export default function Dashboard() {
               Copy your unique link
             </TextAnimate>
             <div className="flex gap-2 justify-center items-center my-2 flex-wrap">
-              <p className="px-5 py-2 bg-gray-100 rounded hidden sm:flex">
+              <p className="px-5 py-2 bg-gray-100 rounded-none border border-gray-400 hidden sm:flex">
                 {url}
               </p>
-              <Button className="h-full" onClick={handleCopy}>
+              <Button
+                className="h-full rounded-none py-2.5"
+                onClick={handleCopy}
+              >
                 Copy
               </Button>
             </div>
@@ -126,6 +129,7 @@ export default function Dashboard() {
               <Button
                 variant="outline"
                 onClick={() => getMessages(session?.user?.id)}
+                className="rounded-none border border-gray-400"
               >
                 <RefreshCcw />
               </Button>

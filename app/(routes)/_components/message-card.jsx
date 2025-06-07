@@ -37,7 +37,7 @@ export default function MessageCard({
 
   const date = new Date(time);
   return (
-    <section className="p-6 rounded-md border">
+    <section className="p-6 rounded-none border border-gray-400">
       <div className="flex justify-between itmes-start gap-x-4">
         <div className="flex flex-col gap-y-2 justify-center items-start">
           <h3 className="text-2xl">{content}</h3>
@@ -45,7 +45,7 @@ export default function MessageCard({
         </div>
         <AlertDialog>
           <AlertDialogTrigger asChild>
-            <Button variant="destructive">
+            <Button variant="destructive" className="rounded-none">
               <XIcon />
             </Button>
           </AlertDialogTrigger>
@@ -57,9 +57,11 @@ export default function MessageCard({
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
-              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogCancel className="rounded-none border-gray-400">
+                Cancel
+              </AlertDialogCancel>
               <AlertDialogAction
-                className="bg-red-500 hover:bg-red-600"
+                className="bg-red-500 hover:bg-red-600 rounded-none"
                 onClick={deleteMessage}
               >
                 Continue
