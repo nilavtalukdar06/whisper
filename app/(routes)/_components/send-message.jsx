@@ -83,14 +83,19 @@ export default function SendMessageComponent({ id }) {
         </Label>
         <Textarea
           id="message"
-          className="rounded shadow-none"
+          className="rounded-none border-gray-400 shadow-none"
           placeholder="Enter your anonymous message here"
           value={message}
           disabled={isSubmitting}
           onChange={(e) => setMessage(e.target.value)}
         />
         <div className="my-5 w-full flex justify-center items-center">
-          <Button type="submit" disabled={isSubmitting} onClick={handleSubmit}>
+          <Button
+            type="submit"
+            disabled={isSubmitting}
+            onClick={handleSubmit}
+            className="rounded-none"
+          >
             {isSubmitting ? (
               <div className="flex justify-center items-center gap-x-2">
                 <Spinner />
@@ -102,7 +107,11 @@ export default function SendMessageComponent({ id }) {
           </Button>
         </div>
         <div className="my-10 flex flex-col justify-center items-center sm:items-start gap-y-6">
-          <Button disabled={isGenerating} onClick={generateContent}>
+          <Button
+            disabled={isGenerating}
+            onClick={generateContent}
+            className="rounded-none"
+          >
             {isGenerating ? (
               <div className="flex justify-center items-center gap-x-2">
                 <Spinner />
@@ -116,11 +125,11 @@ export default function SendMessageComponent({ id }) {
             <p className="text-slate-700 text-center sm:text-start">
               Click on any message below to select it
             </p>
-            <div className="p-5 border rounded w-full">
+            <div className="p-5 border rounded-none border-gray-400 w-full">
               <h2 className="text-2xl">Messages</h2>
               <div className="flex flex-col gap-y-4 my-4">
                 <button
-                  className="px-2 py-2 border rounded text-center cursor-pointer hover:bg-gray-100/80 transition-colors ease-in-out duration-200"
+                  className="px-2 py-2 border border-gray-400 rounded-none text-center cursor-pointer hover:bg-gray-100/80 transition-colors ease-in-out duration-200"
                   disabled={isGenerating}
                   onClick={() => setMessage(suggestedMessages.message_1)}
                 >
@@ -129,7 +138,7 @@ export default function SendMessageComponent({ id }) {
                     : `${suggestedMessages.message_1}`}
                 </button>
                 <button
-                  className="px-2 py-2 border rounded text-center cursor-pointer hover:bg-gray-100/80 transition-colors ease-in-out duration-200"
+                  className="px-2 py-2 border border-gray-400 rounded-none text-center cursor-pointer hover:bg-gray-100/80 transition-colors ease-in-out duration-200"
                   disabled={isGenerating}
                   onClick={() => setMessage(suggestedMessages.message_2)}
                 >
@@ -138,7 +147,7 @@ export default function SendMessageComponent({ id }) {
                     : `${suggestedMessages.message_2}`}
                 </button>
                 <button
-                  className="px-2 py-2 border rounded text-center cursor-pointer hover:bg-gray-100/80 transition-colors ease-in-out duration-200"
+                  className="px-2 py-2 border-gray-400 rounded-none border text-center cursor-pointer hover:bg-gray-100/80 transition-colors ease-in-out duration-200"
                   disabled={isGenerating}
                   onClick={() => setMessage(suggestedMessages.message_3)}
                 >
@@ -152,7 +161,7 @@ export default function SendMessageComponent({ id }) {
           <div className="my-5 flex flex-col w-full gap-y-4 justify-center items-center">
             <p>Get your message board</p>
             <Link href="/signup">
-              <Button>Create Your Account</Button>
+              <Button className="rounded-none">Create Your Account</Button>
             </Link>
           </div>
         </div>
