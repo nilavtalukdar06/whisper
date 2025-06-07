@@ -29,7 +29,7 @@ export default function Testimonial() {
   return (
     <div className="max-w-xl mx-auto my-12">
       <Carousel
-        className="w-full"
+        className="w-full shadow-none"
         plugins={[
           Autoplay({
             delay: 2000,
@@ -40,7 +40,7 @@ export default function Testimonial() {
           {dummyData.map((item, index) => (
             <CarouselItem key={index}>
               <div className="p-1">
-                <Card>
+                <Card className="rounded-none shadow-none border-gray-400">
                   <CardHeader>
                     <CardTitle className="text-2xl font-medium">
                       Message from {item.user}

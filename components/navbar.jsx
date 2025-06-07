@@ -45,7 +45,11 @@ export default function Navbar() {
         {isPending ? (
           <p className="text-xl font-medium">Loading...</p>
         ) : session ? (
-          <Button disabled={isLoading} onClick={logout}>
+          <Button
+            disabled={isLoading}
+            onClick={logout}
+            className="rounded-none shadow-none"
+          >
             {isLoading ? (
               <div className="flex justify-center items-center gap-x-2">
                 <Spinner />
@@ -57,7 +61,7 @@ export default function Navbar() {
           </Button>
         ) : (
           <Link href="/login">
-            <Button>Login</Button>
+            <Button className="rounded-none shadow-none">Login</Button>
           </Link>
         )}
       </div>

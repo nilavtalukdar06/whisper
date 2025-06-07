@@ -18,7 +18,7 @@ export default function HeroSection() {
         className="my-2.5 w-full flex justify-center items-center"
         href="/login"
       >
-        <Button className="w-[180px] h-[50px] rounded-full flex justify-center items-center gap-x-2">
+        <Button className="w-[180px] h-[50px] rounded-none shadow-none flex justify-center items-center gap-x-2">
           <span>Get Started</span>
           <ChevronRight />
         </Button>

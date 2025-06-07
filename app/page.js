@@ -22,7 +22,7 @@ export default function Home() {
           className="w-full flex justify-center items-center"
           href="/contact"
         >
-          <Button className="w-[180px] h-[50px] rounded-full flex justify-center items-center">
+          <Button className="w-[180px] h-[50px] rounded-none shadow-none flex justify-center items-center">
             <span>Contact Us</span>
           </Button>
         </Link>
