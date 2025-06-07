@@ -66,7 +66,7 @@ export default function LoginPage() {
               type="email"
               value={formData.email}
               placeholder="Enter your email"
-              className={`px-3 py-2 border border-gray-200 rounded ${
+              className={`px-3 py-2 border border-gray-200 rounded-none ${
                 isLoading && "opacity-75"
               }`}
               disabled={isLoading}
@@ -84,7 +84,7 @@ export default function LoginPage() {
               type="password"
               value={formData.password}
               placeholder="Enter your password"
-              className={`px-3 py-2 border border-gray-200 rounded ${
+              className={`px-3 py-2 border border-gray-200 rounded-none ${
                 isLoading && "opacity-75"
               }`}
               disabled={isLoading}
@@ -96,7 +96,7 @@ export default function LoginPage() {
           </div>
           <div className="w-full my-4">
             <Button
-              className="rounded w-full py-6 text-lg"
+              className="rounded-none w-full py-6 text-lg"
               type="submit"
               disabled={isLoading}
             >

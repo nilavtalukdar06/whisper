@@ -71,7 +71,7 @@ export default function SignupPage() {
               type="text"
               value={formData.name}
               placeholder="Enter your name"
-              className={`px-3 py-2 border border-gray-200 rounded ${
+              className={`px-3 py-2 border border-gray-200 rounded-none ${
                 isLoading && "opacity-75"
               }`}
               disabled={isLoading}
@@ -89,7 +89,7 @@ export default function SignupPage() {
               type="email"
               value={formData.email}
               placeholder="Enter your email"
-              className={`px-3 py-2 border border-gray-200 rounded ${
+              className={`px-3 py-2 border border-gray-200 rounded-none ${
                 isLoading && "opacity-75"
               }`}
               disabled={isLoading}
@@ -107,7 +107,7 @@ export default function SignupPage() {
               value={formData.password}
               type="password"
               placeholder="Enter your password"
-              className={`px-3 py-2 border border-gray-200 rounded ${
+              className={`px-3 py-2 border border-gray-200 rounded-none ${
                 isLoading && "opacity-75"
               }`}
               disabled={isLoading}
@@ -119,7 +119,7 @@ export default function SignupPage() {
           </div>
           <div className="w-full my-4">
             <Button
-              className="rounded w-full py-6 text-lg"
+              className="rounded-none w-full py-6 text-lg"
               type="submit"
               disabled={isLoading}
             >
