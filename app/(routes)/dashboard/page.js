@@ -17,6 +17,19 @@ export default function Dashboard() {
   const [toggle, setToggle] = useState(true);
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  const getSettings = async (user_id) => {
+    try {
+      const response = await axios.get(`/api/get-settings?user_id=${user_id}`);
+      if (response.data && response.data.settings) {
+        setToggle(response.data.settings.accept_messages);
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to get settings");
+    }
+  };
+
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(url);
@@ -91,6 +104,7 @@ export default function Dashboard() {
     session?.user?.id &&
       setUrl(`https://whisper-xuwf.vercel.app/message/${session?.user?.id}`);
     session?.user?.id && createSettings(session?.user?.id);
+    session?.user?.id && getSettings(session?.user?.id);
     session?.user?.id && getMessages(session?.user?.id);
   }, [session]);
 
