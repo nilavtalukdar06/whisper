@@ -17,9 +17,11 @@ export default function Dashboard() {
   const [toggle, setToggle] = useState(true);
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isGettingMessages, setIsGettingMessages] = useState(false);
 
   const getSettings = async (user_id) => {
     try {
+      setIsGettingMessages(true);
       const response = await axios.get(`/api/get-settings?user_id=${user_id}`);
       if (response.data && response.data.settings) {
         setToggle(response.data.settings.accept_messages);
@@ -27,6 +29,8 @@ export default function Dashboard() {
     } catch (error) {
       console.error(error);
       toast.error("Failed to get settings");
+    } finally {
+      setIsGettingMessages(false);
     }
   };
 
@@ -136,7 +140,11 @@ export default function Dashboard() {
               </Button>
             </div>
             <div className="my-4 flex justify-center items-center gap-x-2">
-              <Switch checked={toggle} onCheckedChange={handleChange} />
+              <Switch
+                checked={toggle}
+                onCheckedChange={handleChange}
+                disabled={isGettingMessages}
+              />
               <p>Accept messages : {toggle ? "on" : "off"}</p>
             </div>
             <div>
