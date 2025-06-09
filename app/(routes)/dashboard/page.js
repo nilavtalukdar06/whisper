@@ -46,6 +46,7 @@ export default function Dashboard() {
         user_id: user_id,
       });
       console.log(result.data);
+      getSettings(user_id);
     } catch (error) {
       console.error(error);
       toast.error("Failed to create settings");
@@ -104,7 +105,6 @@ export default function Dashboard() {
     session?.user?.id &&
       setUrl(`https://whisper-xuwf.vercel.app/message/${session?.user?.id}`);
     session?.user?.id && createSettings(session?.user?.id);
-    session?.user?.id && getSettings(session?.user?.id);
     session?.user?.id && getMessages(session?.user?.id);
   }, [session]);
 
